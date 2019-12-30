@@ -137,7 +137,7 @@ pub struct Sample {
 
     pub metadata: HashMap<u64, MetadataChunk>,
 
-    pub data: Option<Vec<u8>>,
+    pub data: Vec<u8>,
 }
 
 #[derive(Debug, Clone)]
@@ -281,7 +281,7 @@ impl FSB5 {
                 data_offset,
                 samples: self_samples,
                 metadata: chunks,
-                data: None,
+                data: Vec::new(),
             });
         }
 
@@ -315,7 +315,7 @@ impl FSB5 {
             };
             let mut data = Vec::with_capacity(data_end - data_start);
             reader.read_exact(&mut data)?;
-            samples.get_mut(i).unwrap().data = Some(data);
+            samples.get_mut(i).unwrap().data = data;
         }
 
         Ok(Self {

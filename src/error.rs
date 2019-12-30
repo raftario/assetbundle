@@ -9,6 +9,9 @@ pub enum Error {
     #[error("Unrecognized file signature {0:?}")]
     Signature(Vec<u8>),
 
+    #[error("Expected compression type in the [1, 5[ range but got `{0}`")]
+    CompressionType(u32),
+
     #[error("IO error")]
     IO(#[from] io::Error),
 
