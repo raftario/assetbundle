@@ -215,7 +215,7 @@ impl FSB5 {
     pub fn read<R: BufRead + Seek>(mut reader: R) -> Result<Self, Error> {
         let mut magic = [0; 4];
         reader.read_exact(&mut magic)?;
-        if &magic != b"FSB5" {
+        if magic != *b"FSB5" {
             return Err(Error::MagicHeader(magic));
         }
 
